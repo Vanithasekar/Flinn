@@ -24,7 +24,7 @@ const StudentList=()=> {
 
     const MarkList=[
     {Tamil:80,English:70,Maths:50,Science:90,Social:75},
-    {Tamil:50,English:97,Maths:80,Science:85,Social:60}
+    {Tamil:60,English:97,Maths:80,Science:85,Social:60}
     ]
    
     useEffect(() => {
