@@ -1,0 +1,19 @@
+.profile-management-container{
+  /* padding: 10px 0; */
+}
+
+.profile-management-tab-container {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--background-neutral-100);
+}
+
+.profile-management-tabs {
+  border-bottom: 1px solid;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.profile-management-tabs-active {
+  border-bottom: 3px solid var(--background-dark-medium-green-haze);
+}

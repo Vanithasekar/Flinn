@@ -1,0 +1,16 @@
+.student-list {
+  padding: 20px;
+}
+
+.student-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.student-list-table th,
+.student-list-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
