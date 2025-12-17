@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,createContext,ReactNode,useContext } from "react";
 import "./StudentList-block.css";
 const Dummyurl = "https://jsonplaceholder.typicode.com/users";
 type Marks={
-    Tamil:Number;
-    English:Number;
-    Maths:Number;
-    Science:Number;
-    Social:Number;
+    Tamil:number;
+    English:number;
+    Maths:number;
+    Science:number;
+    Social:number;
 }
 type Student = {
     id: number;
@@ -17,8 +17,13 @@ type Student = {
     };
     Marks:Number;
 };
-
-const StudentList=()=> {
+type StudentContextType={
+    students: Student[];
+    loading: boolean;
+    markList: Marks[];
+};
+    const studentcontext=createContext<StudentContextType | null>(null);
+    const StudentProvider=({children}:{children:ReactNode})=>{
     const [students, setStudents] = useState<Student[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -41,6 +46,18 @@ const StudentList=()=> {
         });
     },
 );
+    return(
+    <studentcontext.Provider value={{students,loading,markList:MarkList}}>
+        {children}
+    </studentcontext.Provider>
+    );
+};
+const StudentList = () => {
+  const context = useContext(studentcontext);
+
+  if (!context) return null;
+
+  const { students, loading, markList } = context;
 if (loading) 
     return <div>Loading...........................</div>;
 if (students.length==0)
@@ -64,8 +81,8 @@ return (
         </thead>
         <tbody>
             {students.map((student, index) => {
-                const m =MarkList[index] || {Tamil: 0,English: 0,Maths: 0,Science: 0,Social: 0};
-                const total =m.Tamil + m.English + m.Maths + m.Science + m.Social; 
+                const m =markList[index] || {Tamil: 0,English: 0,Maths: 0,Science: 0,Social: 0};
+                const total =  m.Tamil + m.English + m.Maths + m.Science + m.Social; 
                 return (
                 <tr key={student.id}>
                 <td>{student.name}</td>
@@ -86,6 +103,14 @@ return (
     </div>
   );
 };
+const StudentListBlock=()=>{
+    return(
+        <StudentProvider>
+        <StudentList/>
+        </StudentProvider>
+       
+    );
+}
 
 export default StudentList;
 
